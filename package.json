@@ -11,117 +11,25 @@
   "author": "Kris Siepert",
   "private": true,
   "license": "GPL-2.0",
-  "version": "0.3.10",
+  "version": "0.3.11",
   "main": "src/index.js",
   "scripts": {
-    "start": "electron-forge start",
-    "package": "electron-forge package",
-    "make": "electron-forge make",
-    "publish": "electron-forge publish",
-    "publish-docker": "docker run --rm -it -e \"GITHUB_TOKEN=$GITHUB_TOKEN\" -v $(pwd):/code kriskbx/gtt-taskbar-builder ./build.sh",
     "lint": "eslint src",
     "dev": "NODE_ENV=development webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "watch": "NODE_ENV=development webpack --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "hot": "NODE_ENV=development webpack-dev-server --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
     "production": "NODE_ENV=production webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "production-windows": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    "production-windows": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
-  "config": {
-    "forge": {
-      "publish_targets": {
-        "win32": [
-          "github"
-        ],
-        "darwin": [
-          "github"
-        ],
-        "linux": [
-          "github"
-        ]
-      },
-      "make_targets": {
-        "win32": [
-          "squirrel"
-        ],
-        "darwin": [
-          "zip"
-        ],
-        "linux": [
-          "deb",
-          "rpm"
-        ]
-      },
-      "electronPackagerConfig": {
-        "ignore": [
-          ".idea",
-          "resources",
-          "out",
-          ".tresorit",
-          "appveyor.yml",
-          "build.sh",
-          "Dockerfile",
-          "documentation.md",
-          "Icon",
-          "LICENSE",
-          "mix-manifest.json",
-          "readme.md",
-          "webpack.mix.js",
-          "yarn.lock",
-          "yarn-error.log"
-        ],
-        "packageManager": "yarn",
-        "icon": "./resources/images/icon/icon.png"
-      },
-      "electronWinstallerConfig": {
-        "setupIcon": "./resources/images/icon/icon.ico"
-      },
-      "electronInstallerDebian": {
-        "depends": [
-          "libappindicator1"
-        ],
-        "categories": [
-          "Utility"
-        ],
-        "icon": "./resources/images/icon/icon.png"
-      },
-      "electronInstallerRedhat": {
-        "requires": [
-          "lsb",
-          "libappindicator"
-        ],
-        "compressionLevel": 9,
-        "categories": [
-          "Utility"
-        ]
-      },
-      "electronInstallerSnap": {
-        "grade": "stable",
-        "confinement": "strict",
-        "icon": "./resources/images/icon/icon.png"
-      },
-      "snapStore": {
-        "release": "stable"
-      },
-      "github_repository": {
-        "owner": "kriskbx",
-        "name": "gitlab-time-tracker-taskbar",
-        "draft": false,
-        "prerelease": true
-      },
-      "windowsStoreConfig": {
-        "packageName": "gtt-taskbar",
-        "packageDisplayName": "gitlab time tracker taskbar",
-        "packageVersion": "<%= version %>.0",
-        "publisher": "CN=F0C20719-E0F4-4F1A-99EB-2C25503A0622",
-        "devCert": "",
-        "deploy": false
-      }
-    }
+  "build": {
+    "appId": "com.tobyn.gtt-taskbar"
   },
+  "postinstall": "electron-builder install-app-deps",
   "dependencies": {
     "babel-preset-es2016": "^6.24.1",
     "chokidar": "^2.0.0",
-    "electron": "2.0.8",
     "electron-compile": "^6.4.2",
     "electron-log": "^3.0.0-beta4",
     "electron-squirrel-startup": "^1.0.0",
@@ -135,7 +43,8 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "cross-env": "^5.2.0",
-    "electron-forge": "^5.0.0",
+    "electron": "2.0.8",
+    "electron-builder": "^22.5.1",
     "electron-prebuilt-compile": "1.7.11",
     "eslint": "^3",
     "eslint-config-airbnb": "^15",
