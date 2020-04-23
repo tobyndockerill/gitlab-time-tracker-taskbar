@@ -30,7 +30,7 @@ addons:
       - docker
 
 install:
-  - nvm install 8.4
+  - nvm install 10.16.3
   - npm install -g yarn
   - yarn install
 
