@@ -103,9 +103,9 @@
         "release": "stable"
       },
       "github_repository": {
-        "owner": "kriskbx",
+        "owner": "tobyndockerill",
         "name": "gitlab-time-tracker-taskbar",
-        "draft": false,
+        "draft": true,
         "prerelease": true
       },
       "windowsStoreConfig": {
