@@ -2,9 +2,9 @@ sudo: required
 dist: trusty
 #if: tag IS present
 
-branches:
-  only:
-    - production
+# branches:
+#   only:
+#     - production
 
 language: c
 
