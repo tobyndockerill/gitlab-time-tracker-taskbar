@@ -5,3 +5,4 @@ out
 yarn-error.log
 .tresorit
 **/.DS_Store
+dist
